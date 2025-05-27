@@ -15,8 +15,10 @@ mongoose.connect(process.env.MONGO_URL)
 app.use(express.json())
 app.use(express.urlencoded())
 
-const allowedOrigins = ['http://localhost:3000'];
-
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://think-fashion.vercel.app'
+];
 app.use(cors({
   origin: function (origin, callback) {
     // allow requests with no origin (like mobile apps or curl requests)
