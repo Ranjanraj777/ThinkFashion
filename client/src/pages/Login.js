@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-
-
+import { useAuth } from "../context/AuthContext";
 
 const Login = () => {
   const [form, setForm] = useState({ email: "", password: "" });
   const navigate = useNavigate();
+  const { login } = useAuth(); // ✅ ADD THIS
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -17,15 +17,16 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await axios.post("https://thinkfashion.onrender.com/login", form);
-       toast.success('Login successful!');
-      console.log(res.data);
-      navigate("/"); // 👈 Redirect to Home page
+      const { user } = res.data;
+      
+      login(user); // ✅ updates AuthContext and localStorage
+      toast.success(`Welcome, ${user.name}!`);
+      navigate("/");
     } catch (err) {
-  console.error(err); // Full debug
-  const message = err.response?.data?.message || "login failed!";
-  toast.error(message);
-}
-
+      console.error(err);
+      const message = err.response?.data?.message || "Login failed!";
+      toast.error(message);
+    }
   };
 
   return (

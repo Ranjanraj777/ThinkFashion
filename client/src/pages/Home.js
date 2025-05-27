@@ -1,11 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Products from "../components/Products";       
 import ProductCard from "../components/ProductCard"; 
 
 const categories = ['All', 'T-Shirts', 'Dresses', 'Tops', 'Bottoms', 'Shirts', 'Jackets', 'Footwear', 'Accessories'];
 
 const Home = () => {
-  const [selectedCategory, setSelectedCategory] = useState('All');
+  // Initialize from localStorage if available, else default 'All'
+  const [selectedCategory, setSelectedCategory] = useState(() => {
+    return localStorage.getItem('selectedCategory') || 'All';
+  });
+
+  // Save selected category to localStorage on change
+  useEffect(() => {
+    localStorage.setItem('selectedCategory', selectedCategory);
+  }, [selectedCategory]);
+
   const normalizedSelected = selectedCategory.trim().toLowerCase();
 
   const filteredProducts =

@@ -1,4 +1,14 @@
-const ProductCard = ({ product, onAddToCart, onBuyNow }) => {
+import toast from "react-hot-toast";
+
+const ProductCard = ({ product }) => {
+  const handleAddToCart = () => {
+    toast.success(`${product.name} added to cart`);
+  };
+
+  const handleBuyNow = () => {
+    toast.success(`Proceeding to buy ${product.name}`);
+  };
+
   return (
     <div
       className="bg-gradient-to-r from-slate-500 via-sky-400 to-teal-400 
@@ -19,16 +29,15 @@ const ProductCard = ({ product, onAddToCart, onBuyNow }) => {
         {product.discountPercent}% OFF
       </p>
 
-      {/* Buttons Container */}
       <div className="mt-auto flex flex-col sm:flex-row gap-4 pt-4">
         <button
-          onClick={() => onAddToCart(product)}
+          onClick={handleAddToCart}
           className="w-full sm:flex-1 bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
         >
           Add to Cart
         </button>
         <button
-          onClick={() => onBuyNow(product)}
+          onClick={handleBuyNow}
           className="w-full sm:flex-1 bg-green-600 text-white py-2 rounded hover:bg-green-700 transition"
         >
           Buy Now

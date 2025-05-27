@@ -7,11 +7,13 @@ router.post('/signup', signup);
 router.post('/login', login);
 router.post('/logout', logout);
 
-router.get('/me', authenticate, (req, res) => {
+router.get('/auth', authenticate, (req, res) => {
   res.status(200).json({
     message: 'Access granted',
     user: req.user
   });
 });
+
+
 
 module.exports = router;
