@@ -16,7 +16,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/login", form);
+      const res = await axios.post("https://thinkfashion.onrender.com/login", form);
        toast.success('Login successful!');
       console.log(res.data);
       navigate("/"); // 👈 Redirect to Home page

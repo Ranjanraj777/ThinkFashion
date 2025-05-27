@@ -15,7 +15,7 @@ const Signup = () => {
 const handleSignup = async (e) => {
   e.preventDefault();
   try {
-    const res = await axios.post("http://localhost:5000/signup", form);
+    const res = await axios.post("https://thinkfashion.onrender.com/signup", form);
        toast.success('signup successful!');
     console.log(res.data);
      navigate("/login");
